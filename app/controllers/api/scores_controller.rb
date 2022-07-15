@@ -5,7 +5,7 @@ module Api
     before_action :validate_score_user_id, only: :destroy
 
     def user_feed
-      scores = Score.all.order(played_at: :desc, id: :desc)
+      scores = Score.all.order(played_at: :desc, id: :desc).includes(:user)
       serialized_scores = scores.map(&:serialize)
 
       response = {
@@ -20,11 +20,11 @@ module Api
 
       if score.save
         render json: {
-          score: score.serialize
+          score: score.serialize,
         }
       else
         render json: {
-          errors: score.errors.messages
+          errors: score.errors.messages,
         }, status: :bad_request
       end
     end
@@ -33,7 +33,7 @@ module Api
       @score.destroy!
 
       render json: {
-        score: @score.serialize
+        score: @score.serialize,
       }
     end
 
@@ -50,8 +50,8 @@ module Api
 
       render json: {
         errors: [
-          'Score does not belong to user'
-        ]
+          "Score does not belong to user",
+        ],
       }, status: :unauthorized
     end
   end
