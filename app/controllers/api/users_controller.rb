@@ -41,8 +41,10 @@ module Api
       end
 
       render json: {
+        user: {
         id: user.id,
         name: user.name
+        }
       } if user
     end
   end

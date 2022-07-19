@@ -51,7 +51,7 @@ module Api
 
       render json: {
         scores: user.scores
-      } if user
+      }
     end
 
     private
