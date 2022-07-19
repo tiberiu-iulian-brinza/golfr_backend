@@ -37,6 +37,23 @@ module Api
       }
     end
 
+    def user_scores
+      user = User.find_by(id: params[:id])
+
+      if user.blank?
+        render json: {
+          errors: [
+            "User not found"
+          ]
+        }, status: :not_found
+        return
+      end
+
+      render json: {
+        scores: user.scores
+      } if user
+    end
+
     private
 
     def score_params
