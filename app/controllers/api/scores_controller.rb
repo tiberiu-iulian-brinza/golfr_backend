@@ -51,7 +51,7 @@ module Api
       render json: {
         errors: [
           'Score does not belong to user'
-        ],
+        ]
       }, status: :unauthorized
     end
   end
