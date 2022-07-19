@@ -20,11 +20,11 @@ module Api
 
       if score.save
         render json: {
-          score: score.serialize,
+          score: score.serialize
         }
       else
         render json: {
-          errors: score.errors.messages,
+          errors: score.errors.messages
         }, status: :bad_request
       end
     end
@@ -33,7 +33,7 @@ module Api
       @score.destroy!
 
       render json: {
-        score: @score.serialize,
+        score: @score.serialize
       }
     end
 
@@ -50,7 +50,7 @@ module Api
 
       render json: {
         errors: [
-          "Score does not belong to user",
+          'Score does not belong to user'
         ],
       }, status: :unauthorized
     end
