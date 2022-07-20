@@ -34,7 +34,7 @@ module Api
       if user.blank?
         render json: {
           error: [
-            "User not found"
+            'User not found'
           ]
         }, status: :not_found
         return
@@ -42,10 +42,10 @@ module Api
 
       render json: {
         user: {
-        id: user.id,
-        name: user.name
+          id: user.id,
+          name: user.name
         }
-      } if user
+      }
     end
   end
 end

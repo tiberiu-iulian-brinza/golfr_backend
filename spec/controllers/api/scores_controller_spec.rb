@@ -103,5 +103,18 @@ describe Api::ScoresController, type: :request do
       expect(response).not_to have_http_status(:ok)
       expect(Score.count).to eq score_count
     end
+
+    it 'should limit feed length to 25' do
+      30.times do
+        create(:score, user: @user1, total_score: 101, played_at: '2021-07-15')
+      end
+      get api_feed_path
+
+      expect(response).to have_http_status(:ok)
+      response_hash = JSON.parse(response.body)
+      scores = response_hash['scores']
+
+      expect(scores.size).to eq 25
+    end
   end
 end
